@@ -1,6 +1,5 @@
 package com.worldstream.api.server.command;
 
-import com.worldstream.bus.Consumer;
 import com.worldstream.bus.KafkaProperties;
 
 /**
@@ -20,8 +19,6 @@ public class SubscribeCommand implements Command
     @Override
     public String processCommand()
     {
-    	Consumer consumerThread = new Consumer(KafkaProperties.topic);
-        consumerThread.start();
         // check username password against the database
         return "ok:"+ KafkaProperties.topic +";;";
     }

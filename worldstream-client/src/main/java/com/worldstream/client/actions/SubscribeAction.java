@@ -1,5 +1,7 @@
 package com.worldstream.client.actions;
 
+import com.worldstream.bus.Consumer;
+import com.worldstream.bus.KafkaProperties;
 import com.worldstream.client.messages.Message;
 import com.worldstream.client.messages.ServerMessage;
 import com.worldstream.client.messages.strategy.DefaultReply;
@@ -32,6 +34,8 @@ public class SubscribeAction implements Action {
 	@Override
 	public String processReply(Message message) {
         String topic = strategy.processMessage(message);
+    	Consumer consumerThread = new Consumer(KafkaProperties.topic);
+        consumerThread.start();
         return topic;
 	}
 }
